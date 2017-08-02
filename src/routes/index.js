@@ -1,8 +1,7 @@
 const express = require('express');
 const router = express.Router()
+const controllers = require('../controllers')
 
-router.get('', (req, res) => {
-    res.send('WOW');
-});
+router.get('', controllers.index);
 
 module.exports = router
