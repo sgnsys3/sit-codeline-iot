@@ -1,0 +1,13 @@
+{
+  "name": "sit-codeline-iot",
+  "version": "1.0.0",
+  "description": "using in drawing code line",
+  "main": "index.js",
+  "author": "Pureewat Kaewpoy <pureewat.k@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.15.3",
+    "rpio": "^0.9.17",
+    "socket.io": "^2.0.3"
+  }
+}
