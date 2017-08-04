@@ -18,7 +18,7 @@ server.listen(env.port);
 monitorOnOff(io, isFinish);
 io.on('connection', (client) => {
     client.on('finish', () => {
-        console('finish received');
+        console.log('finish received');
         isFinish.status = true;
     });
 });
