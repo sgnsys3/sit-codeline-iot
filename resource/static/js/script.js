@@ -1,12 +1,6 @@
+var client = io();
+
 let player = document.getElementById('player');
-
-let playList = [
-    'loader/normal.mp4',
-    'game/kirby.mp4',
-    'codeline/song.mp4',
-];
-
-player.webkitEnterFullscreen();
 
 const playByList = (playArr) => {
     if (playArr.length != 0) {
@@ -14,8 +8,17 @@ const playByList = (playArr) => {
         player.play();
         player.onended = () => {
             playByList(playArr);
-        }
+        };
     }
 };
 
-playByList(playList);
+let playList = [
+    'loader/normal.mp4',
+];
+
+client.on('code', (data) => {
+    if(data.code !== '000') {
+        playList.push(`game/${data.code.substring(0, 1)}.mp4`);
+    }
+    playByList(playList);
+});
