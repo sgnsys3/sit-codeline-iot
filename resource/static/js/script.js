@@ -9,6 +9,9 @@ const playByList = (playArr) => {
         player.onended = () => {
             playByList(playArr);
         };
+    } else {
+        client.emit('finish');
+        console.log('firefinish');
     }
 };
 

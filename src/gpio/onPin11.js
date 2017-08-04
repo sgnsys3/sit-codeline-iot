@@ -20,9 +20,10 @@ var codelineArr = [
     'P21', 'P22', 'P23'
 ];
 
-module.exports = (io) => {
+module.exports = (io, isFinish) => {
     // rpio.close(11);
     rpio.open(11, rpio.INPUT, rpio.PULL_UP);
+    rpio.open(13, rpio.INPUT, rpio.PULL_UP);
     rpio.poll(11, () => {
         if(rpio.read(11) == 1) {
             io.emit('off');
@@ -31,19 +32,22 @@ module.exports = (io) => {
                 code: '000',
                 left: codelineArr.length,
             };
-            let luck = Math.floor((Math.random() * 5) + 1);
-            console.log(`Luck: ${luck}`);
-            if (luck != 1) {
-                let range = codelineArr.length;
-                let start = 1;
-                let randArr = Math.floor((Math.random() * range) + start);
-                sendItem = {
-                    code: codelineArr.splice(randArr, 1)[0],
-                    left: codelineArr.length,
-                };
+            if (rpio.read(13) === 0 && isFinish.status) {
+                let luck = Math.floor((Math.random() * 5) + 1);
+                console.log(`Luck: ${luck}`);
+                if (luck != 1) {
+                    let range = codelineArr.length;
+                    let start = 1;
+                    let randArr = Math.floor((Math.random() * range) + start);
+                    sendItem = {
+                        code: codelineArr.splice(randArr, 1)[0],
+                        left: codelineArr.length,
+                    };
+                }
+                console.log(sendItem);
+                isFinish.status = false;
+                io.emit('code', sendItem);
             }
-            console.log(sendItem);
-            io.emit('code', sendItem);
         }
     });
 };
