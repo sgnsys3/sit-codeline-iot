@@ -13,10 +13,6 @@ app.use('/static', express.static('./resource/static'));
 var server = http.createServer(app);
 var io = require('socket.io')(server);
 server.listen(env.port);
-
-
-io.on('connection', (client) => {
-    monitorOnOff(client);
-});
+monitorOnOff(io);
 
 console.log(`Server listen at port ${env.port}`);
