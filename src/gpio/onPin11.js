@@ -20,6 +20,8 @@ var codelineArr = [
     'P21', 'P22', 'P23'
 ];
 
+var oldState = [];
+
 module.exports = (io, isFinish) => {
     // rpio.close(11);
     rpio.open(11, rpio.INPUT, rpio.PULL_UP);
@@ -28,18 +30,21 @@ module.exports = (io, isFinish) => {
         if(rpio.read(11) == 1) {
             io.emit('off');
         } else {
-            let sendItem = {
+            let sendItem = oldState = {
                 code: '000',
                 left: codelineArr.length,
             };
-            if (rpio.read(13) === 0 && isFinish.status) {
+            if (!isFinish.status) {
+                sendItem = oldState;
+            }
+            else if (rpio.read(13) === 0) {
                 let luck = Math.floor((Math.random() * 5) + 1);
                 console.log(`Luck: ${luck}`);
                 if (luck != 1) {
                     let range = codelineArr.length;
                     let start = 1;
                     let randArr = Math.floor((Math.random() * range) + start);
-                    sendItem = {
+                    sendItem = oldState = {
                         code: codelineArr.splice(randArr, 1)[0],
                         left: codelineArr.length,
                     };
