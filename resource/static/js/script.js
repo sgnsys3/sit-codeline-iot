@@ -12,12 +12,11 @@ const playByList = (playArr) => {
     }
 };
 
-let playList = [
-    'loader/normal.mp4',
-];
-
 client.on('code', (data) => {
-    if(data.code !== '000') {
+    let playList = [
+        'loader/normal.mp4',
+    ];
+    if(data.code != '000') {
         playList.push(`game/${data.code.substring(0, 1)}.mp4`);
     }
     playByList(playList);
