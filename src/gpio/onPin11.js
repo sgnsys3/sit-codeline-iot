@@ -24,26 +24,26 @@ module.exports = (io) => {
     // rpio.close(11);
     rpio.open(11, rpio.INPUT, rpio.PULL_UP);
     rpio.poll(11, () => {
-        let sendItem = {
-            code: '000',
-            left: codelineArr.length,
-        };
-        let luck = Math.floor((Math.random() * 5) + 1);
-        console.log(`Luck: ${luck}`);
-        if (luck != 1) {
-            let range = codelineArr.length;
-            let start = 1;
-            let randArr = Math.floor((Math.random() * range) + start);
-            sendItem = {
-                code: codelineArr.splice(randArr, 1)[0],
+        if(rpio.read(11) == 1) {
+            io.emit('off');
+        } else {
+            let sendItem = {
+                code: '000',
                 left: codelineArr.length,
             };
+            let luck = Math.floor((Math.random() * 5) + 1);
+            console.log(`Luck: ${luck}`);
+            if (luck != 1) {
+                let range = codelineArr.length;
+                let start = 1;
+                let randArr = Math.floor((Math.random() * range) + start);
+                sendItem = {
+                    code: codelineArr.splice(randArr, 1)[0],
+                    left: codelineArr.length,
+                };
+            }
+            console.log(sendItem);
+            io.emit('code', sendItem);
         }
-        console.log(sendItem);
-        io.emit('code', sendItem);
-    }, rpio.POLL_LOW);
-    
-    rpio.poll(11, () => {
-        io.emit('stop');
-    }, rpio.POLL_HIGH);
+    });
 };
