@@ -49,7 +49,7 @@ module.exports = (io, isFinish) => {
                         left: codelineArr.length,
                     };
                 }
-                sendItem = oldState;
+                oldState = sendItem;
                 console.log(sendItem);
                 isFinish.status = false;
             }
