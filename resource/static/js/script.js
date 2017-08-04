@@ -24,3 +24,7 @@ client.on('code', (data) => {
     }
     playByList(playList);
 });
+
+client.on('off', () => {
+    player.pause();
+});
