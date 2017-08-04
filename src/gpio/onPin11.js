@@ -30,7 +30,7 @@ module.exports = (io, isFinish) => {
         if(rpio.read(11) == 1) {
             io.emit('off');
         } else {
-            let sendItem = oldState = {
+            let sendItem = {
                 code: '000',
                 left: codelineArr.length,
             };
@@ -44,11 +44,12 @@ module.exports = (io, isFinish) => {
                     let range = codelineArr.length;
                     let start = 1;
                     let randArr = Math.floor((Math.random() * range) + start);
-                    sendItem = oldState = {
+                    sendItem = {
                         code: codelineArr.splice(randArr, 1)[0],
                         left: codelineArr.length,
                     };
                 }
+                sendItem = oldState;
                 console.log(sendItem);
                 isFinish.status = false;
             }
