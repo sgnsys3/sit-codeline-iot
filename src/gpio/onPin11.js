@@ -21,7 +21,7 @@ var codelineArr = [
 ];
 
 module.exports = (io) => {
-    rpio.close(11);
+    // rpio.close(11);
     rpio.open(11, rpio.INPUT, rpio.PULL_UP);
     rpio.poll(11, () => {
         let sendItem = {
