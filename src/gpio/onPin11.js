@@ -46,8 +46,8 @@ module.exports = (io, isFinish) => {
                 }
                 console.log(sendItem);
                 isFinish.status = false;
-                io.emit('code', sendItem);
             }
+            io.emit('code', sendItem);
         }
     });
 };
