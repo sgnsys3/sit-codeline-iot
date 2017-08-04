@@ -21,9 +21,9 @@ var codelineArr = [
 ];
 
 module.exports = (io) => {
-    // rpio.close(11);
-    rpio.open(11, rpio.INPUT, rpio.PULL_UP);
-    rpio.poll(11, () => {
+    // rpio.close(6);
+    rpio.open(6, rpio.INPUT, rpio.PULL_UP);
+    rpio.poll(6, () => {
         let sendItem = {
             code: '000',
             left: codelineArr.length,
@@ -43,7 +43,7 @@ module.exports = (io) => {
         io.emit('code', sendItem);
     }, rpio.POLL_LOW);
     
-    rpio.poll(11, () => {
+    rpio.poll(6, () => {
         io.emit('stop');
     }, rpio.POLL_HIGH);
 };
