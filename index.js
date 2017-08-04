@@ -16,9 +16,11 @@ var server = http.createServer(app);
 var io = require('socket.io')(server);
 server.listen(env.port);
 monitorOnOff(io, isFinish);
-io.on('finish', () => {
-    console('finish received');
-    isFinish.status = true;
+io.on('connection', (client) => {
+    client.on('finish', () => {
+        console('finish received');
+        isFinish.status = true;
+    });
 });
 
 console.log(`Server listen at port ${env.port}`);
