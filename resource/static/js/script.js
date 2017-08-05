@@ -3,6 +3,8 @@ var client = io();
 let player = document.getElementById('player');
 
 const playByList = (playArr, firstLoadTime) => {
+    console.log('playArr', playArr);
+    console.log('firstLoadTime', firstLoadTime);
     firstLoadTime = firstLoadTime || 0;
     if (playArr.length != 0) {
         player.src = `/static/video/${playArr.shift()}`;
@@ -35,6 +37,7 @@ client.on('off', () => {
 
 
 client.on('finish', (data) => {
+    console.log(data);
     let container = document.getElementById('container');
     let showId = document.getElementById('showId');
     container.style.display = 'none';
