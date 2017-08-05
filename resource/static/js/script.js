@@ -2,12 +2,15 @@ var client = io();
 
 let player = document.getElementById('player');
 
-const playByList = (playArr) => {
+const playByList = (playArr, firstLoadTime) => {
+    firstLoadTime = firstLoadTime || 0;
     if (playArr.length != 0) {
         player.src = `/static/video/${playArr.shift()}`;
         player.play();
         player.onended = () => {
-            playByList(playArr);
+            setTimeout(() => {
+                playByList(playArr);
+            }, firstLoadTime);
         };
     } else {
         client.emit('finish');
@@ -23,7 +26,7 @@ client.on('code', (data) => {
     if(data.code != '000') {
         playList.push(`game/${data.code.substring(0, 1)}.mp4`);
     }
-    playByList(playList);
+    playByList(playList, data.bootTime);
 });
 
 client.on('off', () => {
