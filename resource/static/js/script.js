@@ -10,7 +10,7 @@ const playByList = (playArr, firstLoadTime) => {
         player.onended = () => {
             setTimeout(() => {
                 playByList(playArr);
-            }, firstLoadTime);
+            }, firstLoadTime * 1000);
         };
     } else {
         client.emit('finish');
