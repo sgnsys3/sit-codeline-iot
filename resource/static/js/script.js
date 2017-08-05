@@ -32,3 +32,12 @@ client.on('code', (data) => {
 client.on('off', () => {
     player.pause();
 });
+
+
+client.on('finish', (data) => {
+    let container = document.getElementById('container');
+    let showId = document.getElementById('showId');
+    container.style.display = 'none';
+    showId.style.display = 'flex';
+    showId.innerHTML = `<span>${data.code}</span>`;
+});

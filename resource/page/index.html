@@ -21,13 +21,6 @@
             socket.on('connection', () => {
                 console.log('connected');
             });
-            socket.on('finish',(data) => {
-                let container = document.getElementById('container');
-                let showId = document.getElementById('showId');
-                container.style.display= 'none';
-                showId.style.display = 'flex';
-                showId.innerHTML = `<span>${data}</span>`;
-            });
         </script>
     </body>
 </html>
