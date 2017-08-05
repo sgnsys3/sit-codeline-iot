@@ -16,6 +16,7 @@ const playByList = (playArr) => {
 };
 
 client.on('code', (data) => {
+    console.log(data);
     let playList = [
         'loader/normal.mp4',
     ];
