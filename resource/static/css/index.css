@@ -1,3 +1,9 @@
+
+@font-face {
+    font-family: ian;
+    src: url(../font/2005_iannnnnAMD.ttf);
+}
+
 body {
     margin: 0 0 0 0;
     padding: 0 0 0 0;
@@ -16,4 +22,16 @@ body {
 #player {
     width: 100vw;
     max-height: 100%;
+}
+
+#showId {
+    font-size: 15em;
+    font-family: ian;
+    color: white;
+    background-color: black;
+    display: none;
+    width: 100vw;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
 }
