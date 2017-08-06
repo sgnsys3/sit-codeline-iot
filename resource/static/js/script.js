@@ -5,7 +5,7 @@ let container = document.getElementById('container');
 let showId = document.getElementById('showId');
 
 var dataGlobal;
-const playByList = (playArr, firstLoadTime) => {
+const playByList = (playArr, firstLoadTime, code) => {
     console.log('playArr', playArr);
     console.log('firstLoadTime', firstLoadTime);
     firstLoadTime = firstLoadTime || 0;
@@ -16,20 +16,24 @@ const playByList = (playArr, firstLoadTime) => {
         player.play();
         player.onended = () => {
             setTimeout(() => {
-                playByList(playArr);
+                playByList(playArr, 0, code);
             }, firstLoadTime * 1000);
         };
     } else {
-        container.style.display = 'none';
-        showId.style.display = 'flex';
-        if(dataGlobal.code == '000') {
-            showId.innerHTML = '<span>Please Insert Card</span>';
-        } else {
-            showId.innerHTML = `<span>${dataGlobal.code}</span>`;            
-        }
-        client.emit('finish');
-        console.log('firefinish');
+        endPlay(code);
     }
+};
+
+const endPlay = (code) => {
+    container.style.display = 'none';
+    showId.style.display = 'flex';
+    if (dataGlobal.code == '000') {
+        showId.innerHTML = '<span>Please Insert Card</span>';
+    } else {
+        showId.innerHTML = `<span>${code}</span>`;
+    }
+    client.emit('finish');
+    console.log('firefinish');
 };
 
 client.on('code', (data) => {
@@ -41,7 +45,7 @@ client.on('code', (data) => {
     if(data.code != '000') {
         playList.push(`game/${data.code.substring(0, 1)}.mp4`);
     }
-    playByList(playList, data.bootTime);
+    playByList(playList, data.bootTime, data.code);
 });
 
 client.on('off', () => {
