@@ -25,6 +25,7 @@ const playByList = (playArr, firstLoadTime) => {
         container.style.display = 'none';
         showId.style.display = 'flex';
         showId.innerHTML = `<span>${dataGlobal.code}</span>`;
+        new Audio(('../static/sound/Level-Complete.mp3')).play();
     }
 };
 
