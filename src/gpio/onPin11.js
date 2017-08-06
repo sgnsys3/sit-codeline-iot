@@ -47,7 +47,7 @@ module.exports = (io, isFinish) => {
                     let randBootTime = Math.floor((Math.random() * 10) + 1);
                     sendItem = {
                         code: codelineArr.splice(randArr, 1)[0],
-                        bootTime: randBootTime < 6 ? 0 : randBootTime < 9 ? 1 : 2,
+                        bootTime: randBootTime <= 5 ? 0 : randBootTime <= 8 ? 1 : randBootTime <= 9 ? 2 : 4,
                         left: codelineArr.length,
                     };
                 }
