@@ -20,11 +20,15 @@ const playByList = (playArr, firstLoadTime) => {
             }, firstLoadTime * 1000);
         };
     } else {
-        client.emit('finish');
-        console.log('firefinish');
         container.style.display = 'none';
         showId.style.display = 'flex';
-        showId.innerHTML = `<span>${dataGlobal.code}</span>`;
+        if(dataGlobal.code == '000') {
+            showId.innerHTML = '<span>Please Insert Card</span>';
+        } else {
+            showId.innerHTML = `<span>${dataGlobal.code}</span>`;            
+        }
+        client.emit('finish');
+        console.log('firefinish');
     }
 };
 
