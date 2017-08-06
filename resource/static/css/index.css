@@ -9,10 +9,13 @@ body {
     padding: 0 0 0 0;
     background-color: black;
     height: 100vh;
-    overflow-x: hidden;  
-    overflow-y: hidden;
+    /* overflow-x: hidden; */
 }
 
+
+::-webkit-scrollbar { 
+    display: none; 
+}
 
 #standBy {
     display: flex;

@@ -15,7 +15,7 @@ const listSound = {
     'Y': 'vitoyric.mp3',
 };
 
-let playSound = new Audio();
+var playSound = new Audio();
 
 var dataGlobal;
 
@@ -34,17 +34,13 @@ const playByList = (playArr, firstLoadTime, code) => {
                 playByList(playArr, 0, code);
             }, firstLoadTime * 1000);
         };
-        playSound.pause();
+        // playSound.pause();
     } else {
         client.emit('finish');
         console.log('firefinish');
         container.style.display = 'none';
         showId.style.display = 'flex';
-        if(dataGlobal.code === '000') {
-            showId.innerHTML = `<span style="font-size:13em;">${dataGlobal.code}</span>`;
-        } else {
-            showId.innerHTML = `<span>${dataGlobal.code}</span>`;
-        }
+        showId.innerHTML = `<span>${dataGlobal.code}</span>`;
         let soundCode = dataGlobal.code.substring(0,1);
         playSound = new Audio((`../static/sound/${listSound[soundCode]}`)).play();
         endPlay(code);
@@ -55,7 +51,7 @@ const endPlay = (code) => {
     container.style.display = 'none';
     showId.style.display = 'flex';
     if (code == '000') {
-        showId.innerHTML = '<span>Please Insert Card</span>';
+        showId.innerHTML = '<span style="font-size: 0.8em;">Please Insert Card</span>';
     } else {
         showId.innerHTML = `<span>${code}</span>`;
     }
