@@ -27,7 +27,7 @@ const playByList = (playArr, firstLoadTime, code) => {
 const endPlay = (code) => {
     container.style.display = 'none';
     showId.style.display = 'flex';
-    if (dataGlobal.code == '000') {
+    if (code == '000') {
         showId.innerHTML = '<span>Please Insert Card</span>';
     } else {
         showId.innerHTML = `<span>${code}</span>`;
