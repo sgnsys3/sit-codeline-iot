@@ -1,11 +1,9 @@
 var rpio = require('rpio');
 
 var codelineArr = [
-    'R01', 'R06', 'R10', 'R20',
+    'R01', 'R10', 'R20',
 
-    'G05', 'G09', 'G13', 'G16',
-
-    'B12',
+    'G09', 'G13',
 
     'Y07', 'Y12', 'Y14',
 
