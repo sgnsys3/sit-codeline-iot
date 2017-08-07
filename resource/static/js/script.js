@@ -68,7 +68,7 @@ client.on('code', (data) => {
     if(data.code != '000') {
         playList.push(`game/${data.code.substring(0, 1)}.mp4`);
     }
-    playByList(playList, data.bootTime, data.code);
+    playByList([], data.bootTime, data.code);
 });
 
 client.on('off', () => {
